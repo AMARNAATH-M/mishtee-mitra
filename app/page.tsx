@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+/* eslint-disable @next/next/no-img-element */
+import React, { useState, useEffect, CSSProperties } from 'react';
 
 export default function DeliveryDashboard() {
   const [isPulsing, setIsPulsing] = useState(true);
 
-  // Simulates the pulsing animation using React State and Inline Transitions
+  // Simulates the pulsing animation
   useEffect(() => {
     const interval = setInterval(() => {
       setIsPulsing((prev) => !prev);
@@ -13,8 +14,8 @@ export default function DeliveryDashboard() {
     return () => clearInterval(interval);
   }, []);
 
-  // --- Styles Objects ---
-  const styles = {
+  // --- Styles Objects with TypeScript Type ---
+  const styles: { [key: string]: CSSProperties } = {
     pageContainer: {
       display: 'flex',
       justifyContent: 'center',
@@ -29,7 +30,7 @@ export default function DeliveryDashboard() {
       width: '100%',
       maxWidth: '500px',
       backgroundColor: '#ffffff',
-      minHeight: '100vh', // Full height on mobile
+      minHeight: '100vh',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
@@ -54,7 +55,7 @@ export default function DeliveryDashboard() {
     title: {
       fontSize: '24px',
       fontWeight: '700',
-      color: '#FF6B00', // MishTee Orange
+      color: '#FF6B00',
       margin: 0,
       textAlign: 'center',
     },
@@ -74,7 +75,6 @@ export default function DeliveryDashboard() {
       backgroundColor: '#2E7D32',
       borderRadius: '50%',
       marginRight: '8px',
-      // Inline Transition for pulsing effect
       opacity: isPulsing ? 1 : 0.4,
       transform: isPulsing ? 'scale(1.2)' : 'scale(1)',
       transition: 'all 1s ease-in-out',
@@ -124,7 +124,7 @@ export default function DeliveryDashboard() {
       fontWeight: '600',
       cursor: 'pointer',
       boxShadow: '0 4px 6px rgba(255, 107, 0, 0.2)',
-      marginTop: 'auto', // Pushes button to bottom if content is short
+      marginTop: 'auto',
       marginBottom: '20px',
       transition: 'transform 0.2s',
     },
@@ -136,6 +136,7 @@ export default function DeliveryDashboard() {
         
         {/* Header Section */}
         <header style={styles.header}>
+          {/* We use standard img with eslint-disable to avoid next.config.js edits */}
           <img 
             src="https://raw.githubusercontent.com/sudhir-voleti/mishtee-magic/main/mishTee_logo.png" 
             alt="MishTee Magic Logo" 
@@ -164,9 +165,9 @@ export default function DeliveryDashboard() {
         <button 
           style={styles.button}
           onClick={() => alert('Navigation Started!')}
-          onMouseDown={(e) => e.currentTarget.style.transform = 'scale(0.98)'}
-          onMouseUp={(e) => e.currentTarget.style.transform = 'scale(1)'}
-          onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+          onMouseDown={(e: React.MouseEvent<HTMLButtonElement>) => e.currentTarget.style.transform = 'scale(0.98)'}
+          onMouseUp={(e: React.MouseEvent<HTMLButtonElement>) => e.currentTarget.style.transform = 'scale(1)'}
+          onMouseLeave={(e: React.MouseEvent<HTMLButtonElement>) => e.currentTarget.style.transform = 'scale(1)'}
         >
           Start Navigation
         </button>
